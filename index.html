@@ -7,11 +7,11 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
     <style>
@@ -22,11 +22,11 @@
             font-family: Lato, sans-serif;
             color: #0D0000;
         }
-        
+
         header {
             padding: 6px 10%;
         }
-        
+
         h1 {
             position: absolute;
             z-index: 100;
@@ -39,24 +39,24 @@
             background: rgba(25, 25, 25, 0.8);
             border-radius: 5px;
         }
-        
+
         #map {
             position: absolute;
             width: 100%;
             top: 0;
             bottom: 0;
         }
-        
+
         footer {
             padding: 6px 10%;
             width: 80%;
         }
-        
+
         p {
             font-size: 1em;
             color: #001323;
         }
-        
+
         .legend {
             padding: 6px 8px;
             font-size: 1em;
@@ -66,7 +66,7 @@
             border-radius: 5px;
             width: 160px;
         }
-        
+
         .legend h3 {
             font-size: 1.4em;
             font-weight: bold;
@@ -74,19 +74,19 @@
             color: whitesmoke;
             margin: 0;
         }
-        
+
         .legend li {
             list-style-type: none;
             height: 22px;
         }
-        
+
         .legend span {
             width: 30px;
             height: 20px;
             float: left;
             margin-right: 10px;
         }
-        
+
         #ui-controls {
             width: 176px;
             padding: 8px 15px 8px 15px;
@@ -95,24 +95,24 @@
             border-radius: 5px;
             color: whitesmoke;
         }
-        
+
         #ui-controls .min {
-            float: left;
+            float: left; /*left*/
         }
-        
+
         #ui-controls .max {
             float: right;
         }
-        
+
         .year-slider {
             width: 100%;
         }
-        
+
         label {
             font-size: 1.1em;
             font-weight: bold;
         }
-        
+
         .info {
             padding: 6px 8px;
             font-size: 1em;
@@ -122,7 +122,7 @@
             border-radius: 5px;
             text-align: right;
         }
-        
+
         .info h3 {
             margin: 0;
             color: whitesmoke;
@@ -157,7 +157,7 @@
         // load map tiles and add to map
         var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy;' +
-                '<a href="http://cartodb.com/attributions">CartoDB</a>',
+                '<a href="http://carto.com/attribution">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 19
         }).addTo(map);
@@ -181,7 +181,7 @@
                     processData(counties, data);
 
                 }
-            }); // end of Papa.parse() 
+            }); // end of Papa.parse()
 
         }).fail(function () {
 
@@ -223,7 +223,7 @@
 
             // create a slider to interactively change the map data
             createSliderUI();
-            
+
         } // end processData()
 
         // function to draw the map
@@ -246,9 +246,9 @@
             // Loop through each feature (layer) in the geoJSON layer
             dataLayer.eachLayer(function (layer) {
 
-                    // when user mouses over a feature, do the following 
+                    // when user mouses over a feature, do the following
                     layer.on('mouseover', function () {
-                        updateInfo(this); // update the info box                    
+                        updateInfo(this); // update the info box
                         layer.setStyle({ // set the outline color to black
                             color: "black"
                         })
@@ -302,7 +302,7 @@
         } // end of updateMap()
 
 
-        // function to get the class breaks 
+        // function to get the class breaks
         function getClassBreaks() {
 
             // initialize array for values from each feature
@@ -324,8 +324,8 @@
         // function to get the color value
         function getColor(value, breaks) {
 
-            // accepts a data value and array of breaks 
-            // and uses conditional statements to determine  
+            // accepts a data value and array of breaks
+            // and uses conditional statements to determine
             // which color value to return to the function caller
             if (value <= breaks[1]) {
                 return '#feedde';
@@ -445,7 +445,7 @@
             var props = layer.feature.properties;
 
             // populate html variable with header (name of county)
-            // and values for the specified attributes using the 
+            // and values for the specified attributes using the
             // layer (feature) that was passed to this function
             var html = "<h3>" + props['NAME'] + " County</h3>" // +
             for (var yr = 2000; yr <= 2013; yr++) {
